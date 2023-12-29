@@ -24,16 +24,22 @@ import { MessagesWsModule } from './messages-ws/messages-ws.module';
       password: process.env.DB_PASSWORD,
       autoLoadEntities: true,
       synchronize: true,
+      ssl: true, // Enable SSL
+      extra: {
+        ssl: {
+          rejectUnauthorized: false, // You may need to set this to false if using self-signed certificates
+        },
+      },
     }),
-    ServeStaticModule.forRoot({ 
-      rootPath: join(__dirname,'..','public'), 
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'public'),
     }),
     ProductsModule,
     CommonModule,
     SeedModule,
     FilesModule,
     AuthModule,
-    MessagesWsModule
+    MessagesWsModule,
   ],
 })
 export class AppModule {}
